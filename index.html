@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Stopwatch App</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="app-heading">
+        <h1>
+            <span>Tick</span><br>
+            <span>Tock&</span><br>
+            <span>Code!</span>
+        </h1>
+        <div class="arrow">
+            <p>Begin your exploration...</p>
+            <span><h4>Steps:</h4></span>
+                <ol>
+                    <li>Click on the menu options one by one.</li>
+                    <li>Observe the code and see how it works!</li>
+                </ol>
+        </div> 
+    </div>
+    <div class="container">
+        <!-- Left Menu -->
+        <div class="left-panel">
+            <h3>Menu</h3>
+            <ul>
+                <li onclick="showSection('buttons', this)">Buttons</li>
+                <li onclick="showSection('themes', this)">Themes</li>
+                <li onclick="showSection('timer', this)">Timer</li>
+            </ul>
+        </div>
+        <!-- Stopwatch Section -->
+        <div class="stopwatch">
+            <h4>STOPWATCH</h4>
+            <h1 id="displayTime">00:00:00</h1>
+            <div class="buttons">
+                <img src="images/stop.png" onclick="watchStop()">
+                <img src="images/start.png" onclick="watchStart()">
+                <img src="images/reset.png" onclick="watchReset()">
+            </div>
+            <div>
+                <h3>Themes</h3>
+                <div class="theme-selector">
+                    <button onclick="setTheme('room', this)">Room</button>
+                    <button onclick="setTheme('weather', this)">Weather</button>
+                    <button onclick="setTheme('cozy', this)">Cozy</button>
+                </div>
+            </div>
+        </div>
+        <!-- Tutorial Box -->
+        <div class="tutorial-box" id="tutorialBox">
+            <h3>Code</h3>
+            <pre id="codeSnippet">// Select a section to see its code here</pre>
+            <h3>Explanation</h3>
+            <p id="codeExplanation">Click on Buttons, Themes, or Timer to learn how it works!</p>
+            <button id="detailBtn" class="Explainbtn" onclick="toggleDetails()" style="display:none;">Show Detailed Explanation</button>
+            <p id="detailedExplanation" style="display:none; font-size: 0.9rem; color: #f11d1d;">
+                In the <code>stopwatch()</code> function, we use <strong>ternary operators</strong> to ensure that hours, minutes, and seconds are always displayed as two-digit numbers. For example, when the seconds are less than 10, we add a "0" before it so "5" becomes "05". This way, the timer always shows a consistent format like "00:05:09".
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let [sec, min, hrs] = [0, 0, 0];
+        let displayTime = document.getElementById("displayTime");
+        let timer = null;
+
+        function stopwatch() {
+            sec++;
+            if (sec == 60) {
+                sec = 0;
+                min++;
+                if (min == 60) {
+                    min = 0;
+                    hrs++;
+                }
+            }
+            let h = hrs < 10 ? "0" + hrs : hrs;
+            let m = min < 10 ? "0" + min : min;
+            let s = sec < 10 ? "0" + sec : sec;
+            displayTime.innerHTML = h + ":" + m + ":" + s;
+        }
+
+        function watchStart() {
+            if (timer !== null) {
+                clearInterval(timer);
+            }
+            timer = setInterval(stopwatch, 1000);
+        }
+
+        function watchStop() {
+            clearInterval(timer);
+        }
+
+        function watchReset() {
+            clearInterval(timer);
+            timer = null;
+            [sec, min, hrs] = [0, 0, 0];
+            displayTime.innerHTML = "00:00:00";
+        }
+
+        function setTheme(theme, btn) {
+            const stopwatch = document.querySelector(".stopwatch");
+            stopwatch.classList.remove("theme-cozy", "theme-weather", "theme-room");
+            stopwatch.classList.add(`theme-${theme}`);
+
+            // Highlight the button briefly
+            btn.classList.add("highlight");
+            setTimeout(() => {
+                btn.classList.remove("highlight");
+            }, 1000);
+
+            updateTutorial("themes", theme);
+        }
+        
+        function showSection(section, element) {
+            // Highlight selected menu item
+            document.querySelectorAll(".left-panel ul li").forEach(li => li.classList.remove("active"));
+            element.classList.add("active");
+
+            updateTutorial(section);
+        }
+
+        function updateTutorial(section, theme = null) {
+        const codeSnippet = document.getElementById("codeSnippet");
+        const codeExplanation = document.getElementById("codeExplanation");
+        const detailBtn = document.getElementById("detailBtn");
+        const detailedExplanation = document.getElementById("detailedExplanation");
+
+        detailBtn.style.display = "none"; // Hide by default
+        detailedExplanation.style.display = "none"; // Hide by default
+
+        if (section === "buttons") {
+        codeSnippet.textContent = `function watchStart() {
+    if (timer !== null) {
+        clearInterval(timer);
+    }
+    timer = setInterval(stopwatch, 1000);
+}
+
+function watchStop() {
+    clearInterval(timer);
+}
+
+function watchReset() {
+    clearInterval(timer);
+    timer = null;
+    [sec, min, hrs] = [0, 0, 0];
+    displayTime.innerHTML = "00:00:00";
+}`;
+        codeExplanation.textContent = "These are the functions that control the stopwatch: starting, stopping, and resetting the time.";
+    } 
+    else if (section === "themes") {
+        codeSnippet.textContent = `function setTheme(theme) {
+    const stopwatch = document.querySelector('.stopwatch');
+    stopwatch.classList.remove('theme-cozy', 'theme-weather', 'theme-room');
+    stopwatch.classList.add('theme-' + theme);
+}`;
+        if (theme === "room") {
+            codeExplanation.textContent = "This function applies the 'room' theme to the stopwatch.";
+        } else if (theme === "weather") {
+            codeExplanation.textContent = "This function applies the 'weather' theme to the stopwatch.";
+        } else if (theme === "cozy") {
+            codeExplanation.textContent = "This function applies the 'cozy' theme to the stopwatch.";
+        } else {
+            codeExplanation.textContent = "Click on a theme button to see how it changes the stopwatch appearance.";
+        }
+    } 
+    else if (section === "timer") {
+        codeSnippet.textContent = `function stopwatch() {
+    sec++;
+    if (sec == 60) {
+        sec = 0;
+        min++;
+        if (min == 60) {
+            min = 0;
+            hrs++;
+        }
+    }
+    let h = hrs < 10 ? "0" + hrs : hrs;
+    let m = min < 10 ? "0" + min : min;
+    let s = sec < 10 ? "0" + sec : sec;
+    displayTime.innerHTML = h + ":" + m + ":" + s;
+}`;
+        codeExplanation.textContent = "This function keeps track of time by incrementing seconds, minutes, and hours and updating the display.";
+
+        // Show Detail Explanation button
+        detailBtn.style.display = "block";
+    }
+}
+
+function toggleDetails() {
+    const detailedExplanation = document.getElementById("detailedExplanation");
+    const detailBtn = document.getElementById("detailBtn");
+
+    if (detailedExplanation.style.display === "none") {
+        detailedExplanation.style.display = "block";
+        detailBtn.textContent = "Hide Detailed Explanation";
+    } else {
+        detailedExplanation.style.display = "none";
+        detailBtn.textContent = "Show Detailed Explanation";
+    }
+}
+        // Initialize with Buttons section
+        showSection("buttons", document.querySelector(".left-panel ul li"));
+        
+    </script>
+</body>
+</html>
