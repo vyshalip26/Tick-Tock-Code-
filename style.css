@@ -190,7 +190,7 @@ body {
 }
 /* Themes Backgrounds */
 .theme-cozy {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(135, 200, 250, 0.8)), url(images/tornado/tornad.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(135, 200, 250, 0.8)), url(images/tornad.jpg);
     background-size: cover;
     background-position: center;
     color: #fff;
