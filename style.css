@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+.app-heading {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-right: 40px;
+}
+
+.app-heading h1 {
+    font-family: "Kode Mono", monospace;
+    font-weight: 600;
+    font-size: 2.5rem;
+    color: #f80808;
+    letter-spacing: 1px;
+   
+    transition: transform 0.3s ease;
+}
+
+.app-heading h1:hover {
+    transform: scale(1.05);
+}
+.arrow {
+    font-size: 1.5rem;
+    color: #555;
+    font-family: "Pacifico", cursive;;
+    margin-top: -10px;
+    animation: bounce 2s infinite;
+}
+.arrow span {
+    color: #000000;
+    font-size:1.4rem;
+}
+body {
+    background: #edeaff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 15px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.left-panel {
+    width: 150px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: fit-content;
+}
+.left-panel h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+.left-panel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.left-panel ul li {
+    padding: 12px 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+}
+.left-panel ul li:hover {
+    background: #ffc3b3;
+    color: #333;
+}
+.left-panel ul li.active {
+    background: #ff1105;
+    color: white;
+}
+
+/* Stopwatch Styling */
+.stopwatch {
+    flex: 1;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('images/background.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    color: white;
+    height: 500px; 
+    box-sizing: border-box; 
+}
+
+.stopwatch h4 {
+    font-size: 20px;
+    margin: 0;
+}
+.stopwatch h1 {
+    font-size: 48px;
+    margin: 10px 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+.buttons img {
+    width: 50px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.buttons img:hover {
+    transform: scale(1.1);
+}
+.buttons img:active {
+    transform: scale(0.95);
+}
+.theme-selector {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+.theme-selector button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    background: #f0f0f0;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.theme-selector button:hover {
+    background: #ddd;
+}
+.theme-selector button.highlight {
+    animation: highlightAnim 1s forwards;
+}
+@keyframes highlightAnim {
+    0% { background-color: yellow; }
+    100% { background-color: #f0f0f0; }
+}
+
+/* Tutorial Box Styling */
+.tutorial-box {
+    width: 300px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.tutorial-box h3 {
+    margin: 0;
+    font-size: 18px;
+}
+.tutorial-box pre {
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 6px;
+    overflow-x: auto;
+    max-height: 250px;
+}
+.tutorial-box p {
+    margin: 0;
+    font-size: 14px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #555;
+}
+.Explainbtn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    background: #e70f00;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.Explainbtn:hover {
+    background: #fa2d08;
+}
+/* Themes Backgrounds */
+.theme-cozy {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(135, 200, 250, 0.8)), url(images/tornado/tornad.jpg);
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+.theme-weather {
+    background-image: linear-gradient(rgba(255, 228, 196, 0.8), rgba(255, 228, 196, 0.8)), url(images/mountains.jpg);
+    background-size: cover;
+    background-position: center;
+    color: #6b4f3f;
+}
+.theme-room {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)), url(images/room.png);
+    background-size: cover;
+    background-position: center;
+    color: #ff4242;
+}
